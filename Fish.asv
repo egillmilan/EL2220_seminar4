@@ -10,4 +10,4 @@ frx = polyfix(x, frx_dp, n, [0 2000], [0 0]);
 plot(x,frx_dp, 'o'); hold on; grid on;
 plot(linspace(0,2000,2001), polyval(frx, linspace(0,2000,2001)));
 xlabel('Fish in the sea'); ylabel('Increase of fish per year');
-legend('Raw data', '7th degree polynomial fit');
+legend('Raw data', '7th degree approximation');
