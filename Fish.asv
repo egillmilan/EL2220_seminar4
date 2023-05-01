@@ -22,5 +22,16 @@ fe = polyfix(xe, fe_dp, ne, [0 2000], [0 25]);
 
 % plot(xe,fe_dp, 'o'); hold on; grid on;
 % plot(linspace(0,2000,2001), polyval(fe, linspace(0,2000,2001)));
-% xlabel('Fish in the sea'); ylabel('Ship effectiveness [cautg');
+% xlabel('Fish in the sea'); ylabel('Ship effectiveness [fish caught/yr.]');
+% legend('Raw data', '4th degree polynomial fit');
+
+% ================ c. ================
+% No code
+
+% ================ d. ================
+
+k = 10;                                 % number of fishing boats
+xdot = fr - k*[0 0 0 fe];
+plot(linspace(0,2000,2001), polyval(xdot, linspace(0,2000,2001)));
+xlabel('\dot{x'); ylabel('Ship effectiveness [fish caught/yr.]');
 % legend('Raw data', '4th degree polynomial fit');

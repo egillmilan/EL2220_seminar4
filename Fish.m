@@ -30,4 +30,12 @@ fe = polyfix(xe, fe_dp, ne, [0 2000], [0 25]);
 
 % ================ d. ================
 
-k = 10; % number of fishing boats
+k = 7;                                 % number of fishing boats
+xdot = fr - k*[0 0 0 fe];
+
+hold on; grid on;
+plot(linspace(0,2000,2001), polyval(xdot, linspace(0,2000,2001)));
+xlabel('Fish in the sea'); ylabel('Rate of change of fish population');
+
+xeq = roots(xdot);
+xeq = xeq(xeq==real(xeq))'
