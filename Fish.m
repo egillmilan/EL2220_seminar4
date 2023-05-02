@@ -9,7 +9,7 @@ nr = 7;                                 % Degree of fitted polynomial
 fr = polyfix(xr, fr_dp, nr, [0 2000], [0 0]);
 
 % plot(xr,fr_dp, 'o'); hold on; grid on;
-% plot(linspace(0,2000,2001), polyval(fr, linspace(0,2000,2001)));
+% plot([0:2000], polyval(fr, [0:2000]));
 % xlabel('Fish in the sea'); ylabel('Increase of fish per year');
 % legend('Raw data', '7th degree polynomial fit');
 
@@ -30,12 +30,54 @@ fe = polyfix(xe, fe_dp, ne, [0 2000], [0 25]);
 
 % ================ d. ================
 
-k = 7;                                 % number of fishing boats
-xdot = fr - k*[0 0 0 fe];
+k = [1, 9, 17, 23];                     % Number of fishing boats
+xdot_ = fr - k'*[0 0 0 fe];             % xdot = f(x,y)
 
-hold on; grid on;
-plot(linspace(0,2000,2001), polyval(xdot, linspace(0,2000,2001)));
-xlabel('Fish in the sea'); ylabel('Rate of change of fish population');
+% for i = 1:4
+%     xdot = xdot_(i,:);
+% 
+%     hold on; grid on;
+%     plot(linspace(0,2000,2001), polyval(xdot, linspace(0,2000,2001)));
+%     xlabel('Fish in the sea'); ylabel('Rate of change of fish population');
+%     xeq = roots(xdot);                  % Find the roots of x dot
+%     xeq = xeq(xeq==real(xeq))';         % Remove imaginary solutions
+% end
+% legend('k = '+string(k(1)), 'k = '+string(k(2)), 'k = '+string(k(3)), ...
+%        'k = '+string(k(4)))
 
-xeq = roots(xdot);
-xeq = xeq(xeq==real(xeq))'
+% ================ e. ================
+% No code
+
+% ================ f. ================
+step = 1/365;                           % How frequently is the number of boats evaluated? (daily)
+n = 365*50;                             % Number of steps simulated (365 days * 20 years)
+colour = eye(3);
+
+ky = [1, 0.5, 0.1];                     % "Responsiveness" coefficient
+c = 19:24;                              % Number of fish which must be caught to cover operational cost of boat
+x0 = 1000;                              % Initial number of fish in sea
+y0 = 10;                                % Initial number of fishing boats
+
+% for j = 1:6
+%     x = [x0, zeros(1,n-1)];
+%     y = [y0, zeros(1,n-1)];
+%     subplot(3,2,j); hold on; grid on; title('c = ' + string(c(j)))
+%     for k = 1:3
+%         for i = 2:n
+%             xdot = polyval(fr - y(i-1) * [0 0 0 fe], x(i-1));   % Compute change in fish population
+%             ydot = ky(k)*y(i-1)*(polyval(fe, x(i-1))-c(j));     % Compute change in boat quantity
+%             x(i) = x(i-1) + step*xdot;                          % Compute fish population in next time step
+%             y(i) = y(i-1) + step*ydot;                          % Compute boat quantity in next time step
+%         end
+%         plot(x,y,'.', 'Color', colour(k,:))
+%     end
+%     axis([0,2000, 0, inf]); xlabel('Fish'); ylabel('Boats');
+%     legend('k_y = 1','k_y = 0.5', 'k_y = 0.1'); legend boxoff;
+% end
+
+
+% ================ g. ================
+% No code
+
+% ================ h. ================
+% No code
